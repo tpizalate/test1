@@ -2,9 +2,9 @@ import { EventEmitter } from "events";
 
 export class LaunchBluetooth extends EventEmitter {
   private serviceUUID = "88f80580-0000-01e6-aace-0002a5d5c51b";
-  private charUUIDs: any = { cmd: "88f80581-0000-01e6-aace-0002a5d5c51b",
+  private charUUIDs: any = { cmd: "88f80583-0000-01e6-aace-0002a5d5c51b",
                              // sensor: "88f80582-0000-01e6-aace-0002a5d5c51b",
-                             data: "88f80582-0000-01e6-aace-0002a5d5c51b" };
+                             data: "88f80581-0000-01e6-aace-0002a5d5c51b" };
   private _device: BluetoothDevice;
   private _server: BluetoothRemoteGATTServer;
   private _service: BluetoothRemoteGATTService;
@@ -13,8 +13,10 @@ export class LaunchBluetooth extends EventEmitter {
 
   public Connect = async (): Promise<void> => {
     this._device = await navigator.bluetooth.requestDevice({
-      acceptAllDevices: true,
-      optionalServices: ['device_information],
+      filters: [{
+        name: "Launch",
+      }],
+      optionalServices: [this.serviceUUID],
     });
     this._server = await this._device.gatt!.connect();
     this._service = await this._server.getPrimaryService(this.serviceUUID);
