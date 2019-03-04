@@ -13,10 +13,8 @@ export class LaunchBluetooth extends EventEmitter {
 
   public Connect = async (): Promise<void> => {
     this._device = await navigator.bluetooth.requestDevice({
-      filters: [{
-        name: "Launch",
-      }],
-      optionalServices: [this.serviceUUID],
+      acceptAllDevices: true,
+      optionalServices: ['device_information],
     });
     this._server = await this._device.gatt!.connect();
     this._service = await this._server.getPrimaryService(this.serviceUUID);
