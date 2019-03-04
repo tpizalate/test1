@@ -3,7 +3,7 @@
     <div>
       <md-stepper md-vertical>
         <md-step md-label="Welcome" :md-continue="HasBluetooth()">
-          <p>???
+          <p>ballsack
 
           <p>This is a community developed tool for loading and fixing firmware
             on Kiiroo toys. If you experience problems or have questions about
